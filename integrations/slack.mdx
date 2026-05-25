@@ -1,0 +1,59 @@
+---
+title: "Slack"
+description: "Query ticket progress from Slack using the @Waterline bot."
+---
+
+The Waterline Slack integration lets your team check ticket progress without leaving Slack. Mention `@Waterline` with a ticket key and get the current progress score back as a message.
+
+<Note>
+  The Slack integration is in early access.
+</Note>
+
+---
+
+## Connect Slack
+
+<Steps>
+  <Step title="Go to Integrations">
+    In Waterline, navigate to **Settings → Integrations → Slack** and click **Add to Slack**.
+  </Step>
+  <Step title="Authorize the app">
+    You'll be redirected to Slack's OAuth page. Select your workspace and authorize.
+  </Step>
+  <Step title="Invite the bot to a channel">
+    In Slack, invite `@Waterline` to any channel where you want to use it:
+    ```
+    /invite @Waterline
+    ```
+  </Step>
+</Steps>
+
+---
+
+## Usage
+
+Mention `@Waterline` followed by a ticket key:
+
+```
+@Waterline PROJ-123
+```
+
+Waterline responds with:
+
+```
+PROJ-123 — Add user authentication
+Progress: 68%
+
+✅ Login form submits credentials to /api/auth/login
+✅ JWT token stored in httpOnly cookie
+⚠️  Password reset flow — partial
+❌ OAuth (Google) login — no evidence found
+
+Analyzed against: my-org/my-repo
+```
+
+If your workspace has multiple repositories connected, specify which one:
+
+```
+@Waterline PROJ-123 repo:my-org/my-repo
+```

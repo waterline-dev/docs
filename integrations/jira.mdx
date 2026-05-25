@@ -1,0 +1,65 @@
+---
+title: "Jira"
+description: "Connect Waterline to Jira Cloud to analyze ticket progress against your codebase."
+---
+
+Waterline reads Jira tickets to extract acceptance criteria and map them to your codebase. No admin permissions required.
+
+---
+
+## Connect via OAuth
+
+<Steps>
+  <Step title="Go to Integrations">
+    In Waterline, navigate to **Settings → Integrations → Jira** and click **Connect Jira**.
+  </Step>
+  <Step title="Authorize on Atlassian">
+    You'll be redirected to Atlassian's OAuth page. Log in and grant access to your Jira projects.
+  </Step>
+  <Step title="Select a Jira site">
+    If you have multiple Jira Cloud sites, choose which one Waterline should access.
+  </Step>
+  <Step title="Done">
+    Jira is connected. Start analyzing tickets from the **Analyze** tab.
+  </Step>
+</Steps>
+
+Waterline never creates, updates, or deletes Jira issues.
+
+---
+
+## What Waterline reads
+
+| Field | Used for |
+|-------|----------|
+| Summary | Display and context |
+| Description | Acceptance criteria extraction |
+| Acceptance Criteria field (if present) | Direct extraction |
+| Status, Assignee | Display only |
+
+Waterline's analysis automatically extracts acceptance criteria from the ticket description — you don't need a dedicated custom field, though it helps.
+
+---
+
+## Analyzing a ticket
+
+Go to **Analyze**, select **Jira** as the source, and enter a ticket key:
+
+```
+PROJ-123
+```
+
+Results include a progress percentage, per-criterion breakdown, and the code evidence behind each criterion.
+
+---
+
+## Token refresh
+
+Waterline automatically refreshes your Jira OAuth token in the background. If the token is revoked (e.g., access removed in Atlassian), reconnect from **Settings → Integrations → Jira**.
+
+---
+
+## Supported Jira products
+
+- **Jira Cloud** — fully supported
+- **Jira Data Center / Server** — not currently supported

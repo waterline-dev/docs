@@ -1,0 +1,69 @@
+---
+title: "Introduction"
+description: "What Waterline does, who it's for, and how it works."
+---
+
+Waterline connects your GitHub repositories to your issue tracker — Jira, GitHub Issues, or Asana — and tells you **what percentage of each ticket's acceptance criteria are satisfied by your codebase**, at the function and class level.
+
+Instead of manually checking PRs to understand if a feature is done, Waterline does the analysis automatically. Given a ticket key, it returns a progress percentage with a breakdown of which acceptance criteria are covered, which are in progress, and which have no evidence yet.
+
+---
+
+## Who it's for
+
+- **Engineering managers** who want a live signal on ticket completeness without reading diffs
+- **Developers** who want to confirm their implementation covers all acceptance criteria before closing a ticket
+- **QA engineers** who want a structured view of what's implemented before writing test cases
+
+---
+
+## How it works
+
+<Steps>
+  <Step title="Connect your repo">
+    Authorize Waterline to read your GitHub repository. Waterline builds a semantic index of your codebase — every function, class, and method is understood in context.
+  </Step>
+  <Step title="Connect your issue tracker">
+    Link Jira, GitHub Issues, or Asana via OAuth. Waterline reads ticket summaries, descriptions, and acceptance criteria.
+  </Step>
+  <Step title="Analyze a ticket">
+    Enter a ticket key (e.g. `PROJ-123`). Waterline finds the most relevant code for that ticket, scores it against each acceptance criterion, and produces a structured result.
+  </Step>
+  <Step title="Get a progress score">
+    Each criterion is scored SATISFIED, PARTIAL, or UNSATISFIED. The overall score is the percentage of criteria with clear code evidence — honest and explainable, not a guess.
+  </Step>
+</Steps>
+
+---
+
+## Key properties
+
+<CardGroup cols={2}>
+  <Card title="Function-level precision" icon="code">
+    Waterline understands your codebase at the function and class level — not just file names. It pinpoints exactly which code addresses each acceptance criterion.
+  </Card>
+  <Card title="Deterministic scoring" icon="calculator">
+    The progress percentage comes from consistent thresholds, not a raw LLM output. The same codebase and ticket always produce the same score.
+  </Card>
+  <Card title="Always current" icon="arrows-rotate">
+    Every push to your repo triggers an automatic re-index. The index stays fresh without any manual action.
+  </Card>
+  <Card title="No infrastructure" icon="cloud">
+    Fully managed. No LLM keys to configure, no database to run, no vector store to provision. Connect your repo and start analyzing.
+  </Card>
+</CardGroup>
+
+---
+
+## Your code stays yours
+
+Waterline reads your repository to build its index — it never stores your raw source code. Waterline never takes action in your tools without your permission. Jira issues are never modified. GitHub repos are never written to. Asana tasks are only updated when you explicitly enable auto-close.
+
+---
+
+## Next steps
+
+- [Get started in 5 minutes](/quickstart)
+- [Connect GitHub](/integrations/github)
+- [Connect Jira](/integrations/jira)
+- [How the progress score works](/how-it-works/progress-score)

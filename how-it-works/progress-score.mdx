@@ -1,0 +1,90 @@
+---
+title: "Progress Score"
+description: "How the progress percentage is calculated — and what it means."
+---
+
+The progress score is the headline number Waterline produces for each ticket. It's designed to be honest, stable, and explainable — not an optimistic guess.
+
+---
+
+## How it's calculated
+
+Each acceptance criterion is evaluated independently and classified into one of three states:
+
+| State | Meaning |
+|-------|---------|
+| `SATISFIED` | Clear, strong code evidence found |
+| `PARTIAL` | Some evidence found, but incomplete |
+| `UNSATISFIED` | No meaningful code evidence found |
+
+The overall progress percentage is simply:
+
+```
+progress % = SATISFIED criteria / total criteria × 100
+```
+
+PARTIAL criteria don't contribute to the score. They signal work in progress — not done.
+
+---
+
+## Example
+
+A ticket with 4 acceptance criteria:
+
+| Criterion | State |
+|-----------|-------|
+| User can log in with email/password | SATISFIED |
+| Session persists across page reloads | SATISFIED |
+| "Remember me" extends session to 30 days | PARTIAL |
+| Login rate-limited after 5 failed attempts | UNSATISFIED |
+
+```
+progress % = 2 / 4 = 50%
+```
+
+The score is 50% even though 3 of 4 criteria have some evidence. PARTIAL deliberately doesn't inflate the score.
+
+---
+
+## Why the thresholds are fixed
+
+Waterline uses consistent, fixed thresholds to classify criteria — not a raw LLM output. This means the same codebase and the same ticket always produce the same score. The score can only change when:
+
+1. New code is merged
+2. The ticket description is edited
+
+That stability makes the score trustworthy. You can track it over time and know that changes reflect real progress in the codebase.
+
+---
+
+## What the score doesn't mean
+
+A 73% score means 73% of the acceptance criteria have clear code evidence. It does **not** mean:
+
+- 73% of the code is written
+- 73% of the feature is done by time or effort
+- The implemented parts are bug-free or tested
+
+Waterline measures **acceptance criteria coverage in code** — a precise, useful signal, and nothing more.
+
+---
+
+## Uncertainty levels
+
+Every analysis includes an uncertainty level:
+
+| Level | Meaning |
+|-------|---------|
+| `LOW` | Strong, consistent signals — the score is reliable |
+| `MEDIUM` | Mixed evidence — some criteria may be ambiguous |
+| `HIGH` | Sparse evidence — criteria may be underspecified or code not yet written |
+
+High uncertainty is a signal to check the ticket's acceptance criteria or verify the index is up to date.
+
+---
+
+## Improving a low score
+
+- **Review the evidence list** — are the relevant functions showing up? If not, the code may not be indexed yet
+- **Check sync status** — if a recent push hasn't been indexed, check the repo status in Settings
+- **Write more specific criteria** — vague criteria like "it should work" are hard to match to code. See [Acceptance Criteria](/criteria) for guidance

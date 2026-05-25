@@ -1,0 +1,61 @@
+---
+title: "Ticket Analysis"
+description: "How Waterline analyzes a ticket and produces a progress score."
+---
+
+When you analyze a ticket, Waterline runs a pipeline that combines semantic search across your codebase with LLM-powered scoring — then produces a deterministic result from consistent thresholds.
+
+---
+
+## The pipeline
+
+<Steps>
+  <Step title="Fetch the ticket">
+    Waterline retrieves the ticket summary, description, and acceptance criteria from Jira, GitHub Issues, or Asana.
+  </Step>
+  <Step title="Search the codebase">
+    The ticket is used to search your indexed codebase semantically. Waterline finds the functions and classes most likely to implement the ticket's requirements.
+  </Step>
+  <Step title="Score relevance">
+    Each candidate symbol is scored for how directly it addresses the ticket. Noise is filtered out before the next step.
+  </Step>
+  <Step title="Extract and map criteria">
+    Waterline extracts the discrete acceptance criteria from the ticket description, then maps each piece of code evidence to the criteria it supports.
+  </Step>
+  <Step title="Aggregate the score">
+    Each criterion is classified as SATISFIED, PARTIAL, or UNSATISFIED based on the strength of evidence. The overall score is computed from consistent, fixed thresholds — not a variable LLM output.
+  </Step>
+</Steps>
+
+---
+
+## Results are cached
+
+Waterline caches analysis results. The second analysis of the same ticket is instant. Results are automatically refreshed after each push to your repo — so active tickets stay current without manual re-analysis.
+
+---
+
+## What you get back
+
+Each analysis returns:
+
+- **Overall progress %** — the headline score
+- **Per-criterion breakdown** — SATISFIED / PARTIAL / UNSATISFIED for each requirement, with a confidence level
+- **Evidence list** — the specific functions and classes that support each criterion
+- **Uncertainty level** — LOW, MEDIUM, or HIGH, indicating how confident Waterline is in the overall result
+
+---
+
+## Result example
+
+```
+PROJ-123 — Add user authentication
+Progress: 73%
+
+✅ Login endpoint validates credentials         (high confidence)
+✅ JWT token issued on successful login         (high confidence)
+⚠️  Password reset via email                    (partial — email sending found, expiry logic unclear)
+❌ OAuth (Google) login                         (no evidence found)
+
+Uncertainty: LOW
+```

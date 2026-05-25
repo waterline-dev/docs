@@ -1,0 +1,50 @@
+---
+title: "GitHub Issues"
+description: "Use GitHub Issues as your issue tracker with no additional OAuth required."
+---
+
+If your team tracks work in GitHub Issues, Waterline supports that out of the box. Because GitHub Issues live alongside your code, no additional OAuth is needed — Waterline uses your existing GitHub connection.
+
+---
+
+## Enable GitHub Issues
+
+1. Make sure you have a GitHub repository connected (see [GitHub integration](/integrations/github))
+2. Go to **Settings → Integrations → GitHub Issues**
+3. Toggle **Enable GitHub Issues** on
+
+That's it. GitHub Issues is now available as a source when you run an analysis.
+
+---
+
+## Analyzing an issue
+
+Go to **Analyze**, select **GitHub Issues** as the source, and enter an issue number:
+
+```
+42
+```
+
+Waterline fetches the issue, extracts acceptance criteria from the body, and runs the same analysis pipeline — returning a progress percentage, per-criterion breakdown, and code evidence.
+
+---
+
+## How it compares to Jira
+
+| | Jira | GitHub Issues |
+|---|---|---|
+| Auth | Separate OAuth (Atlassian) | Reuses GitHub OAuth |
+| Ticket identifier | `PROJ-123` | Issue number (`42`) |
+| Acceptance criteria source | Description or custom field | Issue body (Markdown) |
+| Custom fields | Yes | Labels and milestones only |
+
+GitHub Issues tends to have less structured acceptance criteria than Jira. Waterline handles free-form Markdown well — checkboxes, bullet lists, and prose descriptions all work.
+
+---
+
+## Tips for better results
+
+- **Use task lists**: `- [ ] user can log in`. Waterline treats each item as a candidate criterion.
+- **Be specific**: "password reset email sent within 30 seconds" gives clearer signals than "reset flow works".
+
+See [Acceptance Criteria](/criteria) for a full guide.

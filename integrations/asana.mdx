@@ -1,0 +1,88 @@
+---
+title: "Asana"
+description: "Connect Waterline to Asana to track task progress, link branches, and auto-close tasks on merge."
+---
+
+The Asana integration goes beyond reading tasks. Waterline links branches and pull requests to Asana tasks automatically — and can mark tasks complete when a PR merges with CI passing.
+
+---
+
+## Connect via OAuth
+
+<Steps>
+  <Step title="Go to Integrations">
+    In Waterline, navigate to **Settings → Integrations → Asana** and click **Connect Asana**.
+  </Step>
+  <Step title="Authorize on Asana">
+    You'll be redirected to Asana's OAuth page. Log in and grant access to your workspace.
+  </Step>
+  <Step title="Select projects to sync">
+    After connecting, choose which Asana projects Waterline should index. Only tasks in selected projects are imported.
+  </Step>
+  <Step title="Sync tasks">
+    Click **Sync tasks** to import tasks from your selected projects. This usually takes under a minute.
+  </Step>
+</Steps>
+
+---
+
+## Analyzing an Asana task
+
+Once tasks are synced, go to **Analyze** and select **Asana** as the source. Search by task name or GID.
+
+Waterline extracts acceptance criteria from the task description and notes, then runs the same analysis pipeline used for Jira — producing a progress percentage, per-criterion breakdown, and code evidence list.
+
+---
+
+## Branch and PR linking
+
+Waterline automatically detects when a branch or pull request is linked to an Asana task. It scans the branch name, PR title, and PR body for the Asana task GID (the 16-digit number in the task URL).
+
+### Link a branch to a task
+
+Name your branch with the task GID:
+
+```
+asana-1234567890123456/add-login-flow
+feature/1234567890123456-user-auth
+```
+
+Find the GID in the Asana task URL:
+
+```
+https://app.asana.com/0/{project_gid}/{task_gid}
+                                        ^^^^^^^^^^^^^^^^
+                                        this is the task GID
+```
+
+You can also include the GID anywhere in your PR title or body and Waterline will pick it up.
+
+### Branch suggestions
+
+When no explicit link exists, Waterline suggests branches that look related to a task based on semantic similarity. Suggestions appear in the task detail view — confirm or dismiss each one.
+
+---
+
+## Auto-close on merge
+
+When a linked PR merges, Waterline can automatically mark the Asana task complete. Three modes are available:
+
+| Mode | Behavior |
+|------|----------|
+| **Auto** | Marks the task complete when the PR merges and CI passes |
+| **Suggest** | Shows a prompt — you confirm or dismiss |
+| **Off** | No auto-close; linking still works |
+
+Configure the mode in **Settings → Integrations → Asana → Auto-close**.
+
+In **Auto** mode, Waterline waits for CI checks to pass before closing the task. If checks are failing or pending, it stores a suggestion instead of auto-closing.
+
+### Undoing an auto-close
+
+If a task is auto-closed by mistake, an undo prompt appears immediately in Waterline. Clicking **Undo** reopens the task in Asana and removes the link.
+
+---
+
+## Re-syncing tasks
+
+To refresh your task index after adding new projects, go to **Settings → Integrations → Asana** and click **Re-sync tasks**.

@@ -1,0 +1,68 @@
+{
+  "name": "Waterline",
+  "logo": {
+    "light": "/logo/light.svg",
+    "dark": "/logo/dark.svg",
+    "href": "https://getwaterline.dev"
+  },
+  "favicon": "/favicon.svg",
+  "colors": {
+    "primary": "#16a34a",
+    "light": "#22c55e",
+    "dark": "#15803d",
+    "background": {
+      "light": "#ffffff",
+      "dark": "#0f0f0f"
+    }
+  },
+  "font": {
+    "headings": {
+      "family": "Geist",
+      "weight": 600
+    },
+    "body": {
+      "family": "Geist",
+      "weight": 400
+    }
+  },
+  "topbarCtaButton": {
+    "name": "Open app →",
+    "url": "https://app.getwaterline.dev"
+  },
+  "anchors": [
+    {
+      "name": "getwaterline.dev",
+      "icon": "house",
+      "url": "https://getwaterline.dev"
+    }
+  ],
+  "navigation": [
+    {
+      "group": "Getting Started",
+      "pages": ["introduction", "quickstart"]
+    },
+    {
+      "group": "Integrations",
+      "pages": [
+        "integrations/github",
+        "integrations/jira",
+        "integrations/github-issues",
+        "integrations/asana",
+        "integrations/slack"
+      ]
+    },
+    {
+      "group": "How It Works",
+      "pages": [
+        "how-it-works/indexing",
+        "how-it-works/analysis",
+        "how-it-works/progress-score",
+        "criteria"
+      ]
+    }
+  ],
+  "footerSocials": {
+    "website": "https://getwaterline.dev"
+  },
+  "customCss": "/custom.css"
+}

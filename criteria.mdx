@@ -1,0 +1,86 @@
+---
+title: "Acceptance Criteria"
+description: "How to write acceptance criteria that produce accurate Waterline scores."
+---
+
+Acceptance criteria are the specific conditions a ticket must satisfy to be considered done. Waterline extracts them from your tickets and matches each one to code evidence in your repository.
+
+The quality of your criteria directly affects the quality of Waterline's analysis. Vague criteria produce uncertain scores. Specific, testable criteria produce clear, reliable results.
+
+---
+
+## Vague vs. specific
+
+| Vague | Specific |
+|-------|----------|
+| "It should work" | "The login endpoint returns HTTP 401 for invalid credentials" |
+| "Handle errors" | "An error toast appears when the API returns a 5xx response" |
+| "User can reset password" | "A password reset email is sent within 30 seconds of request" |
+| "Secure the endpoint" | "The `/admin` route requires a valid JWT with the `admin` role" |
+
+Specific criteria give Waterline concrete signals to match against code. Vague criteria produce low-confidence results across the board.
+
+---
+
+## Good examples
+
+```
+- User can log in with email and password
+- Session persists across page reloads using httpOnly cookies
+- Password reset email contains a link that expires after 24 hours
+- Login is rate-limited after 5 consecutive failed attempts
+- OAuth login via Google redirects to the dashboard on success
+```
+
+---
+
+## How criteria affect the score
+
+Each criterion is independently evaluated and classified:
+
+| State | Meaning |
+|-------|---------|
+| `SATISFIED` | Strong code evidence — criterion is likely implemented |
+| `PARTIAL` | Some evidence found, but incomplete |
+| `UNSATISFIED` | No meaningful code evidence |
+
+The overall progress percentage is the fraction of SATISFIED criteria. PARTIAL doesn't count — it signals work in progress. See [Progress Score](/how-it-works/progress-score) for the full explanation.
+
+---
+
+## Adding criteria to Jira
+
+Waterline reads from both the **Description** field and a dedicated **Acceptance Criteria** field if one exists.
+
+In the Description, write criteria as a bullet list:
+
+```
+**Acceptance criteria:**
+- User can reset password via email link
+- Reset link expires after 24 hours
+- Expired link shows a clear error message
+```
+
+---
+
+## Adding criteria to GitHub Issues or Asana
+
+Use a task list in the issue or task body:
+
+```markdown
+## Acceptance criteria
+
+- [ ] User can reset password via email link
+- [ ] Reset link expires after 24 hours
+- [ ] Expired link shows a clear error message
+```
+
+Waterline treats each list item as a criterion — checkbox state is ignored. Completion is determined by code evidence, not the checkbox.
+
+---
+
+## When Waterline says "no criteria found"
+
+Waterline shows a warning and offers to analyze anyway using the full ticket description. Results without explicit criteria are less precise.
+
+Add explicit criteria to the ticket and re-analyze to get a reliable score.

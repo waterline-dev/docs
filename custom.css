@@ -1,0 +1,35 @@
+/* Geist letter-spacing and heading refinements */
+h1, h2, h3, h4 {
+  letter-spacing: -0.03em;
+}
+
+h1 {
+  letter-spacing: -0.04em;
+}
+
+/* Tighter paragraph spacing */
+p {
+  letter-spacing: -0.01em;
+}
+
+/* Code blocks — sharper corners, darker bg */
+pre, code {
+  letter-spacing: 0;
+  font-size: 0.875em;
+}
+
+/* Nav item refinement */
+nav a {
+  letter-spacing: -0.01em;
+}
+
+/* Card group polish */
+.card {
+  border-radius: 10px;
+}
+
+/* Table header weight */
+th {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}

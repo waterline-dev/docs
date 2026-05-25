@@ -1,0 +1,45 @@
+---
+title: "GitHub"
+description: "Connect Waterline to a GitHub repository to start indexing your codebase."
+---
+
+Waterline reads your GitHub repository to build a semantic index of your codebase and registers a webhook so the index stays in sync with every push.
+
+---
+
+## Connect via OAuth
+
+1. In Waterline, go to **Settings → Integrations → GitHub**
+2. Click **Connect GitHub**
+3. Authorize the Waterline app on GitHub — grant access to the repositories you want to index
+4. Select a specific repository to connect to this workspace
+
+**Required scopes:**
+- `repo` — read access to code, commits, and pull requests (including private repos)
+- `read:user` and `user:email` — read your GitHub identity
+
+Waterline never pushes commits, creates branches, or modifies your repository in any way.
+
+---
+
+## Automatic sync
+
+When you connect a repository, Waterline registers a GitHub webhook. Every push to any branch triggers an automatic incremental update — only changed files are re-processed. No manual syncing needed.
+
+---
+
+## What gets indexed
+
+Waterline processes every source file in the repository: functions, methods, and classes. Binary files, lock files, `node_modules`, `.git`, and build artifacts are excluded automatically.
+
+---
+
+## Connecting multiple repos
+
+Each workspace supports one connected repository. To work across multiple repos, create additional workspaces from the workspace switcher.
+
+---
+
+## Disconnecting a repo
+
+Go to **Settings → Integrations → GitHub** and click **Disconnect**. This removes the webhook from GitHub and stops index updates. Existing analysis results are preserved.

@@ -1,0 +1,38 @@
+---
+title: "Codebase Indexing"
+description: "How Waterline builds and maintains a semantic index of your repository."
+---
+
+Waterline indexes your repository at the function and class level. This lets it pinpoint exactly which part of your codebase implements a given acceptance criterion — not just which file, but which function.
+
+---
+
+## What gets indexed
+
+For each source file, Waterline extracts individually meaningful units of code: functions, methods, classes, and their documentation. Each one is analyzed in context and stored with a semantic understanding of what it does — not just its name.
+
+Binary files, lock files, build output, and dependency directories (`node_modules`, `.git`) are excluded automatically.
+
+---
+
+## Initial indexing
+
+When you first connect a repository, Waterline crawls every source file in parallel and builds the index. For most repositories, this completes in 5–15 minutes. Progress is shown in the dashboard.
+
+---
+
+## Staying in sync
+
+Waterline registers a GitHub webhook on every connected repository. Each push to any branch triggers an automatic incremental update — only changed files are re-processed. The index reflects your latest code within seconds of a push, without any manual action.
+
+---
+
+## Your code is not stored
+
+Waterline reads your source files to build a semantic understanding of what each function and class does. It does not store your raw source code. What's retained is the semantic index — summaries and embeddings — not the code itself.
+
+---
+
+## Supported languages
+
+Waterline supports all major languages used in production codebases, including TypeScript, JavaScript, Python, Go, Ruby, Java, Kotlin, Rust, and more. If you're unsure whether your stack is covered, [contact us](mailto:hello@getwaterline.dev).
