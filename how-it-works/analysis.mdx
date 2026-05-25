@@ -31,7 +31,7 @@ When you analyze a ticket, Waterline runs a pipeline that combines semantic sear
 
 ## Results are cached
 
-Waterline caches analysis results. The second analysis of the same ticket is instant. Results are automatically refreshed after each push to your repo — so active tickets stay current without manual re-analysis.
+Waterline caches analysis results. When a cached result is available, it returns in under a second. After each push, Waterline pre-computes code-to-ticket alignments so the next analysis is faster — but a full re-analysis only runs when you request it.
 
 ---
 

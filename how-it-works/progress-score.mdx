@@ -17,13 +17,13 @@ Each acceptance criterion is evaluated independently and classified into one of 
 | `PARTIAL` | Some evidence found, but incomplete |
 | `UNSATISFIED` | No meaningful code evidence found |
 
-The overall progress percentage is simply:
+The overall progress percentage is:
 
 ```
-progress % = SATISFIED criteria / total criteria × 100
+progress % = (SATISFIED + 0.5 × PARTIAL) / total criteria × 100
 ```
 
-PARTIAL criteria don't contribute to the score. They signal work in progress — not done.
+PARTIAL criteria count at half weight. They signal work in progress — meaningful evidence exists, but not enough to call the criterion done.
 
 ---
 
@@ -39,16 +39,16 @@ A ticket with 4 acceptance criteria:
 | Login rate-limited after 5 failed attempts | UNSATISFIED |
 
 ```
-progress % = 2 / 4 = 50%
+progress % = (2 + 0.5 × 1) / 4 = 63%
 ```
 
-The score is 50% even though 3 of 4 criteria have some evidence. PARTIAL deliberately doesn't inflate the score.
+The "Remember me" criterion is in progress — it contributes half weight. A fully unsatisfied criterion contributes nothing.
 
 ---
 
 ## Why the thresholds are fixed
 
-Waterline uses consistent, fixed thresholds to classify criteria — not a raw LLM output. This means the same codebase and the same ticket always produce the same score. The score can only change when:
+Waterline uses consistent, fixed thresholds to classify criteria — the final score is not a raw LLM output. In practice, the score is stable: the same codebase and ticket tend to produce the same result. The score can change when:
 
 1. New code is merged
 2. The ticket description is edited
